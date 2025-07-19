@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Confusing Verbs Quiz</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f4f6f9;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    h1 {
+      color: #2c3e50;
+      margin-bottom: 30px;
+    }
+
+    .quiz-container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      max-width: 700px;
+      width: 100%;
+    }
+
+    .question {
+      margin-bottom: 20px;
+    }
+
+    .question p {
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .question button {
+      background: #ecf0f1;
+      border: none;
+      padding: 12px 18px;
+      margin: 5px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      font-size: 14px;
+    }
+
+    .question button:hover {
+      background: #dcdde1;
+    }
+
+    .question button.correct {
+      background-color: #2ecc71;
+      color: white;
+    }
+
+    .question button.incorrect {
+      background-color: #e74c3c;
+      color: white;
+    }
+
+    .explanation {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #34495e;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Confusing Verbs Quiz</h1>
+  <div class="quiz-container" id="quiz-container"></div>
+
+  <script>
+    const quizData = [
+      { 
+        sentence: "I can't find my keys. I think I've ___ them.", 
+        options: ["lost", "missed"], 
+        correct: "lost", 
+        explanation: {
+          correct: "'Lost' es correcto porque significa que no puedes encontrar algo. Has extraviado tus llaves.",
+          incorrect: "'Missed' es incorrecto porque se refiere a no haber alcanzado o asistido a algo, como un autobús o evento."
+        }
+      },
+      { 
+        sentence: "I ___ the bus this morning and had to walk.", 
+        options: ["missed", "lost"], 
+        correct: "missed", 
+        explanation: {
+          correct: "'Missed' es correcto porque significa no haber alcanzado algo, como un autobús.",
+          incorrect: "'Lost' es incorrecto porque se refiere a extraviar un objeto, no a no alcanzar un autobús."
+        }
+      },
+      { 
+        sentence: "Can you ___ me to call the doctor later?", 
+        options: ["remind", "remember"], 
+        correct: "remind", 
+        explanation: {
+          correct: "'Remind' es correcto porque significa recordarle a alguien más que haga algo.",
+          incorrect: "'Remember' es incorrecto porque se refiere a recordar algo tú mismo, no a hacer que otro lo recuerde."
+        }
+      },
+      { 
+        sentence: "I don't ___ his name. Do you?", 
+        options: ["remember", "remind"], 
+        correct: "remember", 
+        explanation: {
+          correct: "'Remember' es correcto porque significa recordar algo tú mismo.",
+          incorrect: "'Remind' es incorrecto porque implica hacerle recordar algo a otra persona."
+        }
+      },
+      { 
+        sentence: "I ___ to buy bread, sorry.", 
+        options: ["forgot", "left"], 
+        correct: "forgot", 
+        explanation: {
+          correct: "'Forgot' es correcto porque significa no haber recordado hacer algo.",
+          incorrect: "'Left' es incorrecto porque se refiere a dejar un objeto en algún lugar, no a olvidar una acción."
+        }
+      },
+      { 
+        sentence: "I ___ my phone at home.", 
+        options: ["left", "forgot"], 
+        correct: "left", 
+        explanation: {
+          correct: "'Left' es correcto porque significa que dejaste un objeto físicamente en algún lugar.",
+          incorrect: "'Forgot' es incorrecto porque se refiere a no recordar algo, no a dejarlo físicamente."
+        }
+      },
+      { 
+        sentence: "We ___ a lot of fun at the party!", 
+        options: ["had", "made"], 
+        correct: "had", 
+        explanation: {
+          correct: "'Had' es correcto porque se usa para expresar que experimentaste algo, como diversión.",
+          incorrect: "'Made' es incorrecto porque se refiere a crear o producir algo tangible."
+        }
+      },
+      { 
+        sentence: "She ___ a delicious cake for the celebration.", 
+        options: ["made", "had"], 
+        correct: "made", 
+        explanation: {
+          correct: "'Made' es correcto porque significa crear o producir algo, como un pastel.",
+          incorrect: "'Had' es incorrecto porque se refiere a experimentar o poseer, no a crear."
+        }
+      },
+      { 
+        sentence: "I ___ him for the first time in Madrid.", 
+        options: ["met", "knew"], 
+        correct: "met", 
+        explanation: {
+          correct: "'Met' es correcto porque se refiere a conocer a alguien por primera vez.",
+          incorrect: "'Knew' es incorrecto porque implica estar familiarizado con alguien a lo largo del tiempo."
+        }
+      },
+      { 
+        sentence: "I’ve ___ her since we were kids.", 
+        options: ["known", "met"], 
+        correct: "known", 
+        explanation: {
+          correct: "'Known' es correcto porque se refiere a estar familiarizado con alguien a lo largo del tiempo.",
+          incorrect: "'Met' es incorrecto porque se refiere al encuentro inicial, no a una familiaridad continua."
+        }
+      },
+      { 
+        sentence: "Can I ___ your pen for a second?", 
+        options: ["borrow", "lend"], 
+        correct: "borrow", 
+        explanation: {
+          correct: "'Borrow' es correcto porque significa tomar algo temporalmente de alguien más.",
+          incorrect: "'Lend' es incorrecto porque significa prestar algo temporalmente a otra persona."
+        }
+      },
+      { 
+        sentence: "Sure, I’ll ___ it to you.", 
+        options: ["lend", "borrow"], 
+        correct: "lend", 
+        explanation: {
+          correct: "'Lend' es correcto porque significa prestar algo temporalmente a otra persona.",
+          incorrect: "'Borrow' es incorrecto porque significa tomar algo temporalmente, no prestarlo."
+        }
+      }
+    ];
+
+    const quizContainer = document.getElementById('quiz-container');
+
+    // Function to shuffle array
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    quizData.forEach((q, index) => {
+      const questionDiv = document.createElement('div');
+      questionDiv.className = 'question';
+
+      const questionText = document.createElement('p');
+      questionText.textContent = `${index + 1}. ${q.sentence}`;
+      questionDiv.appendChild(questionText);
+
+      // Shuffle options for this question
+      const shuffledOptions = shuffleArray([...q.options]);
+
+      shuffledOptions.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.textContent = opt;
+        btn.onclick = () => {
+          const buttons = questionDiv.querySelectorAll('button');
+          buttons.forEach(b => b.disabled = true);
+
+          // Show correct answer
+          buttons.forEach(b => {
+            if (b.textContent === q.correct) {
+              b.classList.add('correct');
+            }
+          });
+
+          // Add explanation
+          const explanationDiv = document.createElement('div');
+          explanationDiv.className = 'explanation';
+          explanationDiv.textContent = opt === q.correct ? q.explanation.correct : q.explanation.incorrect;
+          questionDiv.appendChild(explanationDiv);
+
+          // Mark selected button
+          if (opt === q.correct) {
+            btn.classList.add('correct');
+          } else {
+            btn.classList.add('incorrect');
+          }
+        };
+        questionDiv.appendChild(btn);
+      });
+
+      quizContainer.appendChild(questionDiv);
+    });
+  </script>
+
+</body>
+</html>
